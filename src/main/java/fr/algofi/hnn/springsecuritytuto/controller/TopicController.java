@@ -25,11 +25,7 @@ public class TopicController {
     @GetMapping("/topics/{topicId}")
     public ResponseEntity<TopicDto> getTopicsById(@PathVariable Long topicId) {
         Optional<TopicDto> topic = service.getTopicById(topicId);
-        if (topic.isPresent()) {
-            return ResponseEntity.ok(topic.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return topic.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/topics")
