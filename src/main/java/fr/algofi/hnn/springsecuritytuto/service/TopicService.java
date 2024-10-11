@@ -34,11 +34,7 @@ public class TopicService {
 
     public Optional<TopicDto> getTopicById(Long topicId) {
         Optional<Topic> topic = topicRepository.findById(topicId);
-        if (topic.isPresent()) {
-            return Optional.of(toDtoMapper.topicToTopicDto(topic.get(), new CycleAvoidingMappingContext()));
-        } else {
-            return Optional.empty();
-        }
+        return topic.map(value -> toDtoMapper.topicToTopicDto(value, new CycleAvoidingMappingContext()));
     }
 
     public Long createTopic(TopicDto topicDto) {

@@ -31,11 +31,7 @@ public class UserService {
 
     public Optional<UserDto> getUserById(Long userId) {
         Optional<User> user = userRepository.findById(userId);
-        if (user.isPresent()) {
-            return Optional.of(toDtoMapper.userToUserDto(user.get(), new CycleAvoidingMappingContext()));
-        } else {
-            return Optional.empty();
-        }
+        return user.map(value -> toDtoMapper.userToUserDto(value, new CycleAvoidingMappingContext()));
     }
 
     public Long createUser(UserDto userDto) {
