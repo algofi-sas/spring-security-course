@@ -1,6 +1,6 @@
-INSERT INTO "USERS" (EMAIL, PWD, ROLE) VALUES ('userA@example.com', '12345', 'USER');
-INSERT INTO "USERS" (EMAIL, PWD, ROLE) VALUES ('userB@example.com', '12345', 'USER');
-INSERT INTO "USERS" (EMAIL, PWD, ROLE) VALUES ('superuser@example.com', '12345', 'ADMIN');
+INSERT INTO "USERS" (EMAIL, PWD, ROLE) VALUES ('userA@example.com', '{noop}hong123nam!', 'USER');
+INSERT INTO "USERS" (EMAIL, PWD, ROLE) VALUES ('userB@example.com', '{bcrypt}$2a$12$iGmU8r5w1vtEfyw/6N1jteVtXa454n.HvFbhCG94vphJ6mkRA0NFW', 'USER');
+INSERT INTO "USERS" (EMAIL, PWD, ROLE) VALUES ('superuser@example.com', '{bcrypt}$2a$12$DX9uKAZgWIsFM/kj7romVO2EZVuPRzRnjXXJz3UAwYEpb.GAi5IJ2', 'ADMIN');
 
 INSERT INTO "TOPIC" (USER_ID, NAME, SCOPE) VALUES (1, 'JO 2024', 'PUBLIC');
 INSERT INTO "TOPIC" (USER_ID, NAME, SCOPE) VALUES (1, 'Vaccins Covid', 'PROTECTED');
