@@ -8,6 +8,7 @@ import fr.algofi.hnn.springsecuritytuto.mapper.DtoToEntityMapper;
 import fr.algofi.hnn.springsecuritytuto.mapper.EntityToDtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class UserService {
     private UserRepository userRepository;
     private EntityToDtoMapper toDtoMapper;
     private DtoToEntityMapper toEntityMapper;
+    private PasswordEncoder passwordEncoder;
 
     public List<UserDto> getAllUsers() {
         Iterable<User> ite = userRepository.findAll();
@@ -36,7 +38,9 @@ public class UserService {
 
     public Long createUser(UserDto userDto) {
         try {
-            User user = userRepository.save(toEntityMapper.userDtoToUser(userDto, new CycleAvoidingMappingContext()));
+            User user = toEntityMapper.userDtoToUser(userDto, new CycleAvoidingMappingContext());
+            user.setPwd(passwordEncoder.encode(userDto.getPwd()));
+            user = userRepository.save(user);
             return user.getId();
         } catch (Exception e) {
             log.error(e.getMessage());
