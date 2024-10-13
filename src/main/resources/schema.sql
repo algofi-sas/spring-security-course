@@ -25,3 +25,11 @@ create table OPINION(
     foreign key (TOPIC_ID) references TOPIC(ID)
 );
 
+create table AUTHORITY(
+    ID int not null AUTO_INCREMENT,
+    USER_ID int,
+    NAME varchar(40) not null,
+    PRIMARY KEY ( ID ),
+    foreign key (USER_ID) references USERS(ID)
+);
+

@@ -5,19 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-public class Opinion {
+@Table(name = "AUTHORITY")
+@Getter @Setter
+public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @ManyToOne
     private User user;
-
-    @ManyToOne
-    private Topic topic;
-
-    private String details;
 }

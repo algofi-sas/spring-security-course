@@ -21,7 +21,7 @@ public class Topic {
 
     private String scope;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "topic")
