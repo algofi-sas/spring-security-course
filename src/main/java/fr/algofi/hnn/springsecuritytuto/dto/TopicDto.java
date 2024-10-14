@@ -16,4 +16,9 @@ public class TopicDto {
 
     @JsonManagedReference(value = "topic-opinions")
     private List<OpinionDto> opinions;
+
+    @Override
+    public String toString() {
+        return "TopicDto [name=" + name + ", scope=" + scope + ", user=" + user.getEmail() + ", opinions=" + opinions + "]";
+    }
 }

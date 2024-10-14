@@ -8,6 +8,8 @@ import fr.algofi.hnn.springsecuritytuto.mapper.DtoToEntityMapper;
 import fr.algofi.hnn.springsecuritytuto.mapper.EntityToDtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +33,13 @@ public class UserService {
         return result;
     }
 
+    @PostAuthorize("returnObject.get().email == authentication.principal.username || hasRole('ADMIN')")
     public Optional<UserDto> getUserById(Long userId) {
         Optional<User> user = userRepository.findById(userId);
         return user.map(value -> toDtoMapper.userToUserDto(value, new CycleAvoidingMappingContext()));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public Long createUser(UserDto userDto) {
         try {
             User user = toEntityMapper.userDtoToUser(userDto, new CycleAvoidingMappingContext());

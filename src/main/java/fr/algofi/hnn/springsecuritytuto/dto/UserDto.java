@@ -17,4 +17,9 @@ public class UserDto {
 
     @JsonManagedReference(value = "user-opinions")
     private List<OpinionDto> opinions;
+
+    @Override
+    public String toString() {
+        return "UserDto [email=" + email + ", pwd=" + pwd + ", role=" + role + ", opinions=" + opinions + "]";
+    }
 }

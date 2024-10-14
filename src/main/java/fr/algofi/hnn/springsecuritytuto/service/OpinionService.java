@@ -6,6 +6,7 @@ import fr.algofi.hnn.springsecuritytuto.mapper.CycleAvoidingMappingContext;
 import fr.algofi.hnn.springsecuritytuto.mapper.DtoToEntityMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class OpinionService {
     private TopicRepository topicRepository;
     private DtoToEntityMapper toEntityMapper;
 
+    @PreAuthorize("#opinionDto.user.email == authentication.principal.username")
     public Long createOpinion(OpinionDto opinionDto) {
         Optional<User> optionalUser = userRepository.findUserByEmail(opinionDto.getUser().getEmail());
         if (optionalUser.isPresent()) {

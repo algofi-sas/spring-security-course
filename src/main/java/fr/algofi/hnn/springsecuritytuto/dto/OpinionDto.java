@@ -12,4 +12,9 @@ public class OpinionDto {
     private TopicDto topic;
 
     private String details;
+
+    @Override
+    public String toString() {
+        return "OpinionDto [details=" + details + " user=" + user.getEmail() + ", topic=" + topic.getName() + "]";
+    }
 }
